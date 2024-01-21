@@ -62,7 +62,11 @@ contract TicketCollection is ERC1155URIStorage {
         _;
     }
 
-    function mint(string memory tokenURI, address to) external onlyOwner returns (uint256) {
+    function uri(uint256 tokenId) public view override returns (string memory) {
+        return string(abi.encodePacked(super.uri(tokenId), Strings.toString(tokenId), ".json"));
+    }
+
+    function mint(address to) external onlyOwner returns (uint256) {
         startGas = gasleft();
         // current num tickets sold
         // if maxTickets == ticketCount then the last ticket already has been minted
@@ -70,7 +74,7 @@ contract TicketCollection is ERC1155URIStorage {
         // mint token with ticketCount being the ticketId
         _mint(to, ticketsMinted, 1, new bytes(0));
         // set IPFS link for NFT with ticketID
-        _setURI(ticketsMinted, tokenURI);
+        // _setURI(ticketsMinted, tokenURI); 
         ticketsMinted += 1;
         endGas = startGas - gasleft();
         return ticketsMinted;
@@ -78,28 +82,27 @@ contract TicketCollection is ERC1155URIStorage {
 
     // Generates Ids and amounts for the mintBatch function
     // Also Sets the uri for all tickets
-    function _generateIdsAmounts(uint256 num, string[] memory tokenUris) internal returns (uint256[] memory, uint256[] memory) {
-        require(tokenUris.length == num, "Length of tokenUris should match num");
+    function _generateIdsAmounts(uint256 num) internal pure returns (uint256[] memory, uint256[] memory) {
         uint256[] memory ids = new uint256[](num);
         uint256[] memory amounts = new uint256[](num);
         for (uint i = 0; i < num; i++) {
             ids[i]= i;
             amounts[i] = 1;
             // set IPFS link for NFT with ticketID
-            _setURI(i, tokenUris[i]);
+            // _setURI(i, tokenUris[i]);
         }
         return (ids, amounts);
     }
 
     // Should only be called when called to mint first tickets
-    function mintBatch(string[] memory tokenUris, uint256 num, address to) external onlyOwner returns (uint256) {
+    function mintBatch(uint256 num, address to) external onlyOwner returns (uint256) {
         startGas = gasleft();
         // current num tickets sold
         require(ticketsMinted == 0, "Tickets already minted");
         // if maxTickets == ticketCount then the last ticket already has been minted
         require(maxTickets >= num, "Too many tickets");
         // Generating the ids and amounts arrays for the mintBatch command
-        (uint256[] memory ids, uint256[] memory amounts) = _generateIdsAmounts(num, tokenUris);
+        (uint256[] memory ids, uint256[] memory amounts) = _generateIdsAmounts(num);
         // mint token with ticketCount being the ticketId
         _mintBatch(to, ids, amounts, new bytes(0));
         ticketsMinted = num;
