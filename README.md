@@ -1,13 +1,13 @@
-# Sample Hardhat Project
+# TicketIo Contract Deployment, Testing, Verification. 
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a script that deploys that contract.
+This project use used to deploy TicketIo Contracts.
+Currently hardhat is set up to deploy to the Mumbai testnet
 
-Try running some of the following tasks:
+**Commands**
+npx hardhat compile
+npx hardhat coverage
+npx hardhat test --parallel
+npx hardhat run scripts/deploy.js --network <network>
+npx hardhat verify <address> --network sepolia <num_tickets> <owner_addr> <"base_uri">
 
-```shell
-npx hardhat help
-npx hardhat test
-REPORT_GAS=true npx hardhat test
-npx hardhat node
-npx hardhat run scripts/deploy.js
-```
+
