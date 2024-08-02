@@ -1,0 +1,14 @@
+{
+  "name": "Blockchain Life",
+  "performer": "Blockchain Life",
+  "description": "Join the Best Blockchain Event in the World",
+  "image": "https://yellow-magic-possum-182.mypinata.cloud/ipfs/QmZ3J7zSGGNNqrB4PHVU2gn7J9Mw2rL33nPRrHum78Gega/BlockchainLife.jpg",
+  "time": "November 24 7:00pm 2024",
+  "eventStart": 1732489200,
+  "eventEnd": 1732503600,
+  "location": "Dubai, UAE",
+  "venue": "Shangri-La Hotel Dubai",
+  "groupName": "Startup Admission",
+  "isTicket": true,
+  "sig": "sig"
+}

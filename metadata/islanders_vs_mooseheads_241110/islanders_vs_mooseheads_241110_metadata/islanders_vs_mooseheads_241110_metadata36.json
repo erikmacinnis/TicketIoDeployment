@@ -1,0 +1,16 @@
+{
+  "name": "Charlottetown Islanders vs Halifax Mooseheads",
+  "performer": "Charlottetown Islanders",
+  "description": "Intense Maritime QMJHL Match Up",
+  "image": "https://yellow-magic-possum-182.mypinata.cloud/ipfs/Qma3huQ6dCGUjFGL7W4Q1CjvAv98DXoieFfSMN5VxsmJQG/islandersVsMooseheads.jpg",
+  "time": "November 10 7:00pm 2024",
+  "eventStart": 1731279600,
+  "eventEnd": 1731290400,
+  "location": "Charlottetown PEI",
+  "venue": "Eastlink Center",
+  "section": "1",
+  "seat": "7",
+  "row": "4",
+  "column": "",
+  "sig": "sig"
+}

@@ -1,0 +1,14 @@
+{
+  "name": "Baba's Lounge Events",
+  "performer": "Freddy J",
+  "description": "Get Electric!",
+  "image": "https://yellow-magic-possum-182.mypinata.cloud/ipfs/QmZuKKHrD2HyA8GMRhiZ6ft8qiGny2CNvBEoqnt7p5EtY9/freddy_j_image.jpg",
+  "time": "June 5 10:00pm 2024",
+  "eventStart": 1717635600,
+  "eventEnd": 1717650000,
+  "location": "181 Great George St, Charlottetown, PE",
+  "venue": "Baba's Lounge",
+  "groupName": "General Admission",
+  "isTicket": true,
+  "sig": "sig"
+}

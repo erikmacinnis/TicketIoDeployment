@@ -7,7 +7,7 @@ async function main() {
   const wallet = new hre.ethers.Wallet(process.env.MAINNET_PRIVATE_KEY, hre.ethers.provider);
   const nonce = await hre.ethers.provider.getTransactionCount(wallet.address, "pending");
   const feeData = await provider.getFeeData();
-  const gasPrice = feeData.gasPrice;
+  const gasPrice = feeData.maxFeePerGas;
  
   const ticketIo = await hre.ethers.deployContract("TicketCollection", 
     [
