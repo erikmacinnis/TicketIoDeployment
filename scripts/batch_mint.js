@@ -5,7 +5,7 @@ const hre = require("hardhat");
 
 async function main() {
     const provider = hre.ethers.provider;
-    const wallet = new hre.ethers.Wallet(process.env.PRIVATE_KEY, provider);
+    const wallet = new hre.ethers.Wallet(process.env.MAINNET_PRIVATE_KEY, provider);
 
     const contractAddr = process.env.CONTRACT_ADDR
     const ticketIo = await new hre.ethers.Contract(contractAddr, ticketCollection.abi, wallet)
@@ -13,7 +13,19 @@ async function main() {
     const num = process.env.NUM_TICKETS
     const toAddress = process.env.OWNER_ADDR
 
-    const ticketsMinted = await ticketIo.mintBatch(num, toAddress)
+    // Get the current nonce for the wallet address
+    const nonce = await provider.getTransactionCount(wallet.address);
+
+    const feeData = await provider.getFeeData();
+    const gasPrice = feeData.gasPrice;
+
+    // Include the nonce, gas price, and gas limit in the transaction options
+    const transactionOptions = {
+        nonce: nonce,
+        gasPrice: gasPrice,
+    };
+
+    const ticketsMinted = await ticketIo.mintBatch(num, toAddress, transactionOptions)
 
     console.log(`Transaction Hash: ${ticketsMinted.hash}`)
 

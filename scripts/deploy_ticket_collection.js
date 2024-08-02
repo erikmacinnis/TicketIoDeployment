@@ -3,12 +3,23 @@ require('dotenv').config();
 const hre = require("hardhat");
 
 async function main() {
+  const provider = hre.ethers.provider;
+  const wallet = new hre.ethers.Wallet(process.env.MAINNET_PRIVATE_KEY, hre.ethers.provider);
+  const nonce = await hre.ethers.provider.getTransactionCount(wallet.address, "pending");
+  const feeData = await provider.getFeeData();
+  const gasPrice = feeData.gasPrice;
+ 
   const ticketIo = await hre.ethers.deployContract("TicketCollection", 
     [
       process.env.MAX_TICKETS, 
       process.env.OWNER_ADDR, 
       process.env.BASE_URI,
-    ]);
+    ],
+    {
+      nonce: nonce,
+      gasPrice: gasPrice,
+    }
+  );
 
   await ticketIo.waitForDeployment();
 
